@@ -1,4 +1,4 @@
-@extends('layoyt')
+@extends('layout')
 
 @section('content')
     <h1>Write New Article</h1>
