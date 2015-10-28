@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 
 class ArticlesController extends Controller
@@ -50,7 +51,10 @@ class ArticlesController extends Controller
     {
         $article = new Article($request->all());
         \Auth::user()->articles()->save($article);
-        return redirect('articles');
+        return redirect('articles')->with([
+            'flash_message' => 'Your article has been created',
+            'flash_message_important' => true,
+        ]);
     }
 
     public function edit(Article $article)
