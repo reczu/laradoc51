@@ -8,9 +8,14 @@
         <article>
             <h2>
                 <a href="{{ action('ArticlesController@show', [$article->id]) }}">{{ $article->title }}</a>
+                @if(Auth::check())
+                <a class="btn btn-sm btn-danger" href="{{ action('ArticlesController@edit', ['article' => $article]) }}" role="button">Edit</a>
+                @endif
             </h2>
 
-            <div class="body">{{ $article->body }}</div>
+            <div class="body">
+                {{ $article->body }}
+            </div>
 
         </article>
     @endforeach
