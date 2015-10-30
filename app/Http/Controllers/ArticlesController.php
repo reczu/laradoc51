@@ -40,7 +40,8 @@ class ArticlesController extends Controller
 
     public function create()
     {
-        return view('articles.create');
+        $tags = \App\Tag::lists('name', 'id');
+        return view('articles.create', compact('tags'));
     }
 
     /**
@@ -51,14 +52,16 @@ class ArticlesController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        \Auth::user()->articles()->create($request->all());
+        $article = \Auth::user()->articles()->create($request->all());
+        $article->tags()->attach($request->input('tag_list'));
         flash()->success('Your article has been created');
         return redirect('articles');
     }
 
     public function edit(Article $article)
     {
-        return view('articles.edit', compact('article'));
+        $tags = \App\Tag::lists('name', 'id');
+        return view('articles.edit', compact('article', 'tags'));
     }
 
     public function update(Article $article, ArticleRequest $request)
