@@ -8,9 +8,11 @@ use Carbon\Carbon;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
+use Laracasts\Flash\Flash;
 
 class ArticlesController extends Controller
 {
@@ -49,12 +51,9 @@ class ArticlesController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        $article = new Article($request->all());
-        \Auth::user()->articles()->save($article);
-        return redirect('articles')->with([
-            'flash_message' => 'Your article has been created',
-            'flash_message_important' => true,
-        ]);
+        \Auth::user()->articles()->create($request->all());
+        flash()->success('Your article has been created');
+        return redirect('articles');
     }
 
     public function edit(Article $article)
