@@ -4,7 +4,7 @@
     <h1>Write New Article</h1>
     <hr />
 
-    {!! Form::open(['action' => 'ArticlesController@store']) !!}
+    {!! Form::model($article = new \App\Article(), ['action' => 'ArticlesController@store']) !!}
         @include('articles.form', ['submitButton' => 'Add Article'])
     {!! Form::close() !!}
 
