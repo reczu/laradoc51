@@ -23,6 +23,10 @@
                 </li>
             </ul>
 
+            <ul class="nav navbar-nav">
+                <li><p class="navbar-text">Our latest: {!! link_to_action('ArticlesController@show', $latest->title, [$latest->id]) !!}</p> </li>
+            </ul>
+
             <ul class="nav navbar-nav navbar-right">
                 @if(Auth::guest())
                     <li><a href="{{ action('Auth\AuthController@getLogin') }}">Login</a></li>
